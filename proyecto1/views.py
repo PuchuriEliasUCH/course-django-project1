@@ -1,8 +1,18 @@
 from django.http import HttpResponse
 import datetime
 
-def saludo(req):  
-  return HttpResponse("Bienvenidos al framework Django")
+from django.template import Template, Context 
+
+def saludo(req):
+  # Comienza la busqueda en la raiz del proyecto
+  doc_externo = open('./proyecto1/static/primeraPlantilla.html')
+  tmpl = Template(doc_externo.read())
+  doc_externo.close()
+
+  context = Context()
+  documento = tmpl.render(context)
+  
+  return HttpResponse(documento)
 
 def despedida(req):
   return HttpResponse("Gracias por visitar mi sitio")
