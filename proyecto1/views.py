@@ -4,13 +4,25 @@ import datetime
 from django.template import Template, Context 
 
 def saludo(req):
+  fecha_actual = datetime.datetime.now()
   # Comienza la busqueda en la raiz del proyecto
   doc_externo = open('./proyecto1/static/primeraPlantilla.html')
-  tmpl = Template(doc_externo.read())
+  template = Template(doc_externo.read())
   doc_externo.close()
 
-  context = Context()
-  documento = tmpl.render(context)
+  context = Context({
+    'name': 'Daniel', 
+    'surname': 'Puchuri', 
+    'today': fecha_actual, 
+    'temas': [
+      'Instalación', 
+      'Plantillas', 
+      'Modelos', 
+      'Formularios',
+      'Despliegue'  
+      ],
+    })
+  documento = template.render(context)
   
   return HttpResponse(documento)
 
