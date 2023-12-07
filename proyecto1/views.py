@@ -1,12 +1,10 @@
 from django.http import HttpResponse
 import datetime
 
-from django.template import loader
+from django.shortcuts import render
 
 def saludo(req):
   fecha_actual = datetime.datetime.now()
-  # Comienza la busqueda en la raiz del proyecto
-  doc_externo = loader.get_template('primeraPlantilla.html')
 
   context = {
     'name': 'Daniel', 
@@ -20,9 +18,8 @@ def saludo(req):
       'Despliegue'  
       ],
     }
-  documento = doc_externo.render(context)
   
-  return HttpResponse(documento)
+  return render(req, 'primeraPlantilla.html', context)
 
 def despedida(req):
   return HttpResponse("Gracias por visitar mi sitio")
