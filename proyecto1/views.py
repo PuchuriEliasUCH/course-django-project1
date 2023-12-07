@@ -1,16 +1,14 @@
 from django.http import HttpResponse
 import datetime
 
-from django.template import Template, Context 
+from django.template import loader
 
 def saludo(req):
   fecha_actual = datetime.datetime.now()
   # Comienza la busqueda en la raiz del proyecto
-  doc_externo = open('./proyecto1/static/primeraPlantilla.html')
-  template = Template(doc_externo.read())
-  doc_externo.close()
+  doc_externo = loader.get_template('primeraPlantilla.html')
 
-  context = Context({
+  context = {
     'name': 'Daniel', 
     'surname': 'Puchuri', 
     'today': fecha_actual, 
@@ -21,8 +19,8 @@ def saludo(req):
       'Formularios',
       'Despliegue'  
       ],
-    })
-  documento = template.render(context)
+    }
+  documento = doc_externo.render(context)
   
   return HttpResponse(documento)
 
