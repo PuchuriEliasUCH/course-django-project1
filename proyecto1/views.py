@@ -43,3 +43,11 @@ def calculaEdad(req, edad, anio):
   </html>"""
 
   return HttpResponse(documento)
+
+def herencia1_html(req):
+  context = {} 
+  return render(req, './herencia_templ/hijo1.html', context)
+
+def herencia2_html(req):
+  context = {} 
+  return render(req, './herencia_templ/hijo2.html', context)
